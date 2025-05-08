@@ -1,1 +1,55 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+
+      <!-- Asset loader -->
+      <a-assets>
+        <img id="my-image2" src="assets/card.png" />
+      </a-assets>
+
+      <a-assets>
+        <video id="my-image" autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="assets/myvid.mp4" type="video/mp4" />
+        </video>
+      </a-assets>
+
+      <!-- Camera -->
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Tracked image target -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
+            position="0 0 0"
+            width="1"
+            height="0.562"
+            material="shader: flat; src: #my-image"
+        ></a-plane>
+      </a-entity>
+
+    </a-scene>
+
+    <script>
+        window.addEventListener("click", () => {
+          const vid = document.querySelector("#my-image");
+          if (vid && vid.paused) {
+            vid.play().catch((err) => console.log("Video play error:", err));
+          }
+        });
+
+        window.addEventListener("DOMContentLoaded", () => {
+          const vid = document.querySelector("#my-image");
+          if (vid && vid.paused) {
+            vid.play().catch((err) => console.log("Initial video play error:", err));
+          }
+        });
+      </script>
+
+  </body>
+</html>
