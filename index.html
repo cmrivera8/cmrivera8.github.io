@@ -20,22 +20,49 @@
         </video>
       </a-assets>
 
+        <a-assets>
+        <video id="my-image2" autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="assets/vid2.mp4" type="video/mp4" />
+        </video>
+      </a-assets>
+
       <!-- Camera -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <!-- Tracked image target -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane
+      <!-- <a-entity mindar-image-target="targetIndex: 0"> -->
+        <!-- <a-plane
             position="0 0 0"
             width="1"
             height="0.562"
             material="shader: flat; src: #my-image"
         ></a-plane>
+      </a-entity> -->
+
+      <!-- Tracked image target for the first video (target) -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
+          position="0 0 0"
+          width="1"
+          height="0.562"
+          material="shader: flat; src: #my-image"
+        ></a-plane>
       </a-entity>
+
+      <!-- Tracked image target for the second video (target2) -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane
+          position="0 0 0"
+          width="1"
+          height="0.562"
+          material="shader: flat; src: #my-image2"
+        ></a-plane>
+      </a-entity>
+
 
     </a-scene>
 
-    <script>
+    <!-- <script>
         window.addEventListener("click", () => {
           const vid = document.querySelector("#my-image");
           if (vid && vid.paused) {
@@ -49,7 +76,35 @@
             vid.play().catch((err) => console.log("Initial video play error:", err));
           }
         });
-      </script>
+      </script> -->
+
+      <script>
+      window.addEventListener("click", () => {
+        const vid1 = document.querySelector("#my-image");
+        const vid2 = document.querySelector("#my-image2");
+
+        if (vid1 && vid1.paused) {
+          vid1.play().catch((err) => console.log("Video play error:", err));
+        }
+
+        if (vid2 && vid2.paused) {
+          vid2.play().catch((err) => console.log("Video play error:", err));
+        }
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const vid1 = document.querySelector("#my-image");
+        const vid2 = document.querySelector("#my-image2");
+
+        if (vid1 && vid1.paused) {
+          vid1.play().catch((err) => console.log("Initial video play error:", err));
+        }
+
+        if (vid2 && vid2.paused) {
+          vid2.play().catch((err) => console.log("Initial video play error:", err));
+        }
+      });
+    </script>
 
   </body>
 </html>
