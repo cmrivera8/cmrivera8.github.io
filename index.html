@@ -9,18 +9,15 @@
   <body>
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
 
-      <!-- Asset loader -->
-      <a-assets>
-        <img id="my-image2" src="assets/card.png" />
-      </a-assets>
-
+      <!-- Asset loader for video 1 -->
       <a-assets>
         <video id="my-image" autoplay loop muted playsinline crossorigin="anonymous">
           <source src="assets/vid1.mp4" type="video/mp4" />
         </video>
       </a-assets>
 
-        <a-assets>
+      <!-- Asset loader for video 2 -->
+      <a-assets>
         <video id="my-image2" autoplay loop muted playsinline crossorigin="anonymous">
           <source src="assets/vid2.mp4" type="video/mp4" />
         </video>
@@ -29,79 +26,54 @@
       <!-- Camera -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Tracked image target -->
-      <!-- <a-entity mindar-image-target="targetIndex: 0"> -->
-        <!-- <a-plane
+      <!-- Tracked image target for vid1 -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
             position="0 0 0"
             width="1"
             height="0.562"
             material="shader: flat; src: #my-image"
         ></a-plane>
-      </a-entity> -->
-
-      <!-- Tracked image target for the first video (target) -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane
-          position="0 0 0"
-          width="1"
-          height="0.562"
-          material="shader: flat; src: #my-image"
-        ></a-plane>
       </a-entity>
 
-      <!-- Tracked image target for the second video (target2) -->
+      <!-- Tracked image target for vid2 -->
       <a-entity mindar-image-target="targetIndex: 1">
         <a-plane
-          position="0 0 0"
-          width="1"
-          height="0.562"
-          material="shader: flat; src: #my-image2"
+            position="0 0 0"
+            width="1"
+            height="0.562"
+            material="shader: flat; src: #my-image2"
         ></a-plane>
       </a-entity>
-
 
     </a-scene>
 
-    <!-- <script>
-        window.addEventListener("click", () => {
-          const vid = document.querySelector("#my-image");
-          if (vid && vid.paused) {
-            vid.play().catch((err) => console.log("Video play error:", err));
-          }
-        });
-
-        window.addEventListener("DOMContentLoaded", () => {
-          const vid = document.querySelector("#my-image");
-          if (vid && vid.paused) {
-            vid.play().catch((err) => console.log("Initial video play error:", err));
-          }
-        });
-      </script> -->
-
-      <script>
+    <script>
+      // Play video on click
       window.addEventListener("click", () => {
         const vid1 = document.querySelector("#my-image");
         const vid2 = document.querySelector("#my-image2");
 
         if (vid1 && vid1.paused) {
-          vid1.play().catch((err) => console.log("Video play error:", err));
+          vid1.play().catch((err) => console.log("Video 1 play error:", err));
         }
 
         if (vid2 && vid2.paused) {
-          vid2.play().catch((err) => console.log("Video play error:", err));
+          vid2.play().catch((err) => console.log("Video 2 play error:", err));
         }
       });
 
+      // Play video on page load
       window.addEventListener("DOMContentLoaded", () => {
         const vid1 = document.querySelector("#my-image");
         const vid2 = document.querySelector("#my-image2");
 
         if (vid1 && vid1.paused) {
-          vid1.play().catch((err) => console.log("Initial video play error:", err));
+          vid1.play().catch((err) => console.log("Initial video 1 play error:", err));
         }
 
         if (vid2 && vid2.paused) {
-          vid2.play().catch((err) => console.log("Initial video play error:", err));
+          vid2.play().catch((err) => console.log("Initial video 2 play error:", err));
         }
       });
     </script>
